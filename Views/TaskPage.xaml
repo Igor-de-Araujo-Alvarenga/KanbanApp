@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="KanbanApp.Views.TaskPage"
+             Title="TaskPage">
+    
+    <VerticalStackLayout Padding="50">
+        <HorizontalStackLayout>
+            <VerticalStackLayout>
+                <Label 
+                Text="Title"
+                VerticalOptions="Center" 
+                HorizontalOptions="Start" />
+                <Entry x:Name="Title" Text="{Binding Task.Title}" HorizontalOptions="Start" HeightRequest="30" MinimumWidthRequest="300" />
+            </VerticalStackLayout>
+            <VerticalStackLayout Margin="40,0,0,0">
+                <Label 
+                Text="Due date"
+                VerticalOptions="Center" 
+                HorizontalOptions="Start"/>
+                <DatePicker x:Name="DueDate" Date="{Binding Task.DueDate}"/>
+            </VerticalStackLayout>
+            <VerticalStackLayout Margin="40,0,0,0" x:Name="Status">
+                <Label 
+                Text="Status"
+                VerticalOptions="Center" 
+                HorizontalOptions="Start"/> 
+                <Picker x:Name="picker"
+                    SelectedItem="{Binding Task.Status}">
+                    <Picker.ItemsSource>
+                        <x:Array Type="{x:Type x:String}">
+                            <x:String>Ready</x:String>
+                            <x:String>In progress</x:String>
+                            <x:String>Done</x:String>
+                        </x:Array>
+                    </Picker.ItemsSource>
+                </Picker>
+            </VerticalStackLayout>
+        </HorizontalStackLayout>
+        
+        <Label 
+            Margin="0,20,0,0"
+            Text="Description"
+            VerticalOptions="Center" 
+            HorizontalOptions="Start" />
+        <Editor x:Name="Description" HeightRequest="150" Text="{Binding Task.Description}" />
+
+        <HorizontalStackLayout Margin="0,30,0,0">
+            <Button x:Name="BtnSaveTask" Text="{Binding SaveButtonText}" Command="{Binding SaveTaskCommand}" BackgroundColor="Green" TextColor="White" WidthRequest="100"/>
+            <Button Margin="20,0,0,0
+                    " x:Name="BtnCancel" Text="Cancel" Command="{Binding CancelCommand}" BackgroundColor="Red" TextColor="White" WidthRequest="100"/>
+        </HorizontalStackLayout>
+    </VerticalStackLayout>
+</ContentPage>

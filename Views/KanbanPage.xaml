@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewModels="clr-namespace:KanbanApp.ViewModels"
+             x:Class="KanbanApp.Views.KanbanPage"
+             Title="KanbanPage">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Clicked="OpenAdd" IconImageSource="{FontImage Glyph='+', Color=White, Size=16}" />
+    </ContentPage.ToolbarItems>
+
+    <VerticalStackLayout>
+        <Grid Margin="20">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Label Text="Ready Tasks" Grid.Row="1" Grid.Column="0" HorizontalOptions="StartAndExpand"
+                   VerticalOptions="Start" FontAttributes="Bold" FontSize="20" />
+            <CollectionView Margin="0,10,0,0" Grid.Row="2" Grid.Column="0" ItemsSource="{Binding ReadyTasks}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <StackLayout Margin="0,8,0,0">
+                            <Label Text="{Binding Title}" />
+                            <Label Text="{Binding DueDate, StringFormat='Due: {0:d}'}" />
+                            <BoxView HeightRequest="1" Color="Grey"/>
+                            <HorizontalStackLayout>
+                                <Button Text="Edit"
+                                    BackgroundColor="Transparent"
+                                    VerticalOptions="Center"
+                                    HorizontalOptions="Center"
+                                    Clicked="OpenEdit"
+                                    MinimumHeightRequest="20" />
+                            </HorizontalStackLayout>
+                            <HorizontalStackLayout>
+                                <Button Text="->"
+                                    TextColor="LightBlue"
+                                    BackgroundColor="Transparent"
+                                    VerticalOptions="Center"
+                                    HorizontalOptions="Center"
+                                    Margin="20,0,0,0"
+                                    MinimumHeightRequest="20" />
+                            </HorizontalStackLayout>
+                        </StackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <Label  Grid.Row="1" Grid.Column="1" HorizontalOptions="StartAndExpand"
+                   VerticalOptions="Start" Text="In Progress Tasks" FontAttributes="Bold" FontSize="20" />
+            <CollectionView Margin="0,10,0,0" Grid.Row="2" Grid.Column="1" ItemsSource="{Binding InProgressTasks}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <StackLayout Margin="0,8,0,0">
+                            <Label Text="{Binding Title}" />
+                            <Label Text="{Binding DueDate, StringFormat='Due: {0:d}'}" />
+                            <HorizontalStackLayout>
+                                <Button Text="Edit"
+                                    BackgroundColor="Transparent"
+                                    VerticalOptions="Center"
+                                    HorizontalOptions="Center"
+                                    Clicked="OpenEdit"
+                                    MinimumHeightRequest="20" />
+                            </HorizontalStackLayout>
+                            <BoxView HeightRequest="1" Color="Grey"/>
+                        </StackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <Label Grid.Row="1" Grid.Column="2" Text="Done Tasks" FontAttributes="Bold" FontSize="20"
+                    HorizontalOptions="StartAndExpand" VerticalOptions="Start"/>
+            <CollectionView  Margin="0,10,0,0" Grid.Row="2" Grid.Column="2"  ItemsSource="{Binding DoneTasks}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <StackLayout Margin="0,8,0,0">
+                            <Label Text="{Binding Title}" />
+                            <Label Text="{Binding DueDate, StringFormat='Due: {0:d}'}" />
+                            <HorizontalStackLayout>
+                                <Button Text="Edit"
+                                    BackgroundColor="Transparent"
+                                    VerticalOptions="Center"
+                                    HorizontalOptions="Center"
+                                    Clicked="OpenEdit"
+                                    MinimumHeightRequest="20" />
+                            </HorizontalStackLayout>
+                            <BoxView HeightRequest="1" Color="Grey"/>
+                        </StackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </Grid>
+    </VerticalStackLayout>
+</ContentPage>
