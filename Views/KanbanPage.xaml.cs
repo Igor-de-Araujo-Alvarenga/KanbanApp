@@ -33,4 +33,10 @@ public partial class KanbanPage : ContentPage
         _mainPageViewModel.Task = (TaskItemModel)button.BindingContext;
         _mainPageViewModel.OpenEditCommand.Execute(null);
     }
+    public void NextStatus(Object sender, EventArgs e) 
+    {
+        var button = (Button)sender;
+        _mainPageViewModel.Task = (TaskItemModel)button.BindingContext;
+        _mainPageViewModel.NextStatusCommand.Execute(null);
+    }
 }

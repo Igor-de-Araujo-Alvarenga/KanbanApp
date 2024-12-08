@@ -44,6 +44,7 @@ namespace KanbanApp.ViewModels
             taskService = _taskService;
             OpenEditCommand = new Command(OpenEditTask);
             OpenAddCommand = new Command(OpenAddTask);
+            NextStatusCommand = new Command(NextStatus);
         }
         public void InitializeTasks()
         {
@@ -91,17 +92,16 @@ namespace KanbanApp.ViewModels
             await App.Current.MainPage.Navigation.PushModalAsync(new TaskPage(taskService));
         }
 
-        private async void OpenNextStatus(Object sender, EventArgs e)
+        private void NextStatus()
         {
-            var button = (Button)sender;
-            var taskItem = (TaskItemModel)button.BindingContext;
+            if (Task.Status.ToLower().Replace(" ", "") == EnumStatusModels.InProgress.ToString().ToLower())
+                Task.Status = "Done";
+            if (Task.Status == EnumStatusModels.Ready.ToString())
+                Task.Status = "In progress";
+            
 
-            if (taskItem.Status == EnumStatusModels.Ready.ToString())
-                taskItem.Status = EnumStatusModels.InProgress.ToString();
-            if (taskItem.Status == EnumStatusModels.InProgress.ToString())
-                taskItem.Status = EnumStatusModels.Done.ToString();
-
-            // _taskService
+            taskService.SaveTask(Task);
+            InitializeTasks();
         }
 
         protected void OnPropertyChanged([CallerMemberName] string propertyName = null)

@@ -8,12 +8,12 @@
         <ToolbarItem Clicked="OpenAdd" IconImageSource="{FontImage Glyph='+', Color=White, Size=16}" />
     </ContentPage.ToolbarItems>
 
-    <VerticalStackLayout>
+    <VerticalStackLayout VerticalOptions="FillAndExpand">
         <Grid Margin="20">
             <Grid.RowDefinitions>
-                <RowDefinition Height="*" />
-                <RowDefinition Height="*" />
-                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
@@ -23,13 +23,15 @@
 
             <Label Text="Ready Tasks" Grid.Row="1" Grid.Column="0" HorizontalOptions="StartAndExpand"
                    VerticalOptions="Start" FontAttributes="Bold" FontSize="20" />
-            <CollectionView Margin="0,10,0,0" Grid.Row="2" Grid.Column="0" ItemsSource="{Binding ReadyTasks}">
+            <CollectionView VerticalOptions="FillAndExpand"  HeightRequest="400" Margin="0,10,0,0" Grid.Row="2" Grid.Column="0" ItemsSource="{Binding ReadyTasks}">
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout Orientation="Vertical" ItemSpacing="10" />
+                </CollectionView.ItemsLayout>
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <StackLayout Margin="0,8,0,0">
                             <Label Text="{Binding Title}" />
                             <Label Text="{Binding DueDate, StringFormat='Due: {0:d}'}" />
-                            <BoxView HeightRequest="1" Color="Grey"/>
                             <HorizontalStackLayout>
                                 <Button Text="Edit"
                                     BackgroundColor="Transparent"
@@ -37,16 +39,16 @@
                                     HorizontalOptions="Center"
                                     Clicked="OpenEdit"
                                     MinimumHeightRequest="20" />
-                            </HorizontalStackLayout>
-                            <HorizontalStackLayout>
                                 <Button Text="->"
                                     TextColor="LightBlue"
                                     BackgroundColor="Transparent"
                                     VerticalOptions="Center"
                                     HorizontalOptions="Center"
                                     Margin="20,0,0,0"
+                                    Clicked="NextStatus"
                                     MinimumHeightRequest="20" />
                             </HorizontalStackLayout>
+                            <BoxView HeightRequest="1" Color="Grey"/>
                         </StackLayout>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
@@ -54,7 +56,10 @@
 
             <Label  Grid.Row="1" Grid.Column="1" HorizontalOptions="StartAndExpand"
                    VerticalOptions="Start" Text="In Progress Tasks" FontAttributes="Bold" FontSize="20" />
-            <CollectionView Margin="0,10,0,0" Grid.Row="2" Grid.Column="1" ItemsSource="{Binding InProgressTasks}">
+            <CollectionView VerticalOptions="FillAndExpand" HeightRequest="400" Margin="0,10,0,0" Grid.Row="2" Grid.Column="1" ItemsSource="{Binding InProgressTasks}">
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout Orientation="Vertical" ItemSpacing="10" />
+                </CollectionView.ItemsLayout>
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <StackLayout Margin="0,8,0,0">
@@ -66,6 +71,14 @@
                                     VerticalOptions="Center"
                                     HorizontalOptions="Center"
                                     Clicked="OpenEdit"
+                                    MinimumHeightRequest="20" />
+                                <Button Text="->"
+                                    TextColor="LightBlue"
+                                    BackgroundColor="Transparent"
+                                    VerticalOptions="Center"
+                                    HorizontalOptions="Center"
+                                    Margin="20,0,0,0"
+                                    Clicked="NextStatus"
                                     MinimumHeightRequest="20" />
                             </HorizontalStackLayout>
                             <BoxView HeightRequest="1" Color="Grey"/>
@@ -76,7 +89,10 @@
 
             <Label Grid.Row="1" Grid.Column="2" Text="Done Tasks" FontAttributes="Bold" FontSize="20"
                     HorizontalOptions="StartAndExpand" VerticalOptions="Start"/>
-            <CollectionView  Margin="0,10,0,0" Grid.Row="2" Grid.Column="2"  ItemsSource="{Binding DoneTasks}">
+            <CollectionView VerticalOptions="FillAndExpand" HeightRequest="400" Margin="0,10,0,0" Grid.Row="2" Grid.Column="2"  ItemsSource="{Binding DoneTasks}">
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout Orientation="Vertical" ItemSpacing="10" />
+                </CollectionView.ItemsLayout>
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <StackLayout Margin="0,8,0,0">
